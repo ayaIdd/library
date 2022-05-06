@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:e_library/lib/google_icon.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:e_library/lib/resetpassword.dart';
 
 import 'package:e_library/Screens/home/home.dart';
 
@@ -137,8 +138,8 @@ class _LoginScreenState extends State<LoginScreen> {
                    // Spacer(),
                    TextButton(
 
-                      onPressed: () {},
-                      child: const Text('Forget Password'),
+                      onPressed: ()  =>Navigator.of(context).push(MaterialPageRoute(builder:(context)=>ResetScreen() )),  // ResetScreen
+                      child: const Text('Forgot Password'),
                     ),
                   ],),
 

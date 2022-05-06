@@ -94,10 +94,11 @@ class _IteemViewState2 extends State<IteemView2>{
 
                                     return ListTile( //title ,autheur , isbn , image )
                                       title : Text("BOOK TITLE : $title "),
-                                      onTap: () {Navigator.push(context, MaterialPageRoute(
-                                          builder: (context) => bookdetails(),
-                                        ));
-                                      },
+                                      subtitle: Text("author: $autheur"),
+                                      // onTap: () {Navigator.push(context, MaterialPageRoute(
+                                      //     builder: (context) => bookdetails(),
+                                      //   ));
+                                      // },
 
 
 

@@ -83,10 +83,11 @@ class _IteemViewState extends State<IteemView>{
                             itemExtent: 80,
                             itemCount: snapshot.data.docs.length,
                             itemBuilder: (context, index) {
-                              return //ListTile(title: Text(snapshot.data.docs[index]['categorie'] ?? '') ,);
-                              Expanded(child: CardUI())
+                              return ListTile(title: Text(snapshot.data.docs[index]['categorie'] ?? '') ,);
+
                             }
-                        );})
+                        );
+                      })
 
 
 
