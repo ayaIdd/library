@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,12 +9,21 @@ import 'package:e_library/Screens/home/components/item_card.dart';
 import 'package:e_library/components/app_bar.dart';
 import 'package:e_library/components/bottom_nav.dart';
 import 'package:e_library/constants.dart';
+import '../../lib/net/userModel.dart';
 import '../../lib/notification.dart';
 import 'components/filter.dart';
 import 'components/search_bar.dart';
 
+
+
 class HomeScreen extends StatelessWidget {
+   HomeScreen({Key key}) : super(key: key);
   @override
+
+      List<Item> demoItems  = [] ;
+  @override
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(
@@ -46,7 +57,7 @@ class HomeScreen extends StatelessWidget {
               ),
               SizedBox(height: kDefaultPadding),
               SizedBox(height: kDefaultPadding),
-              StaggeredGridView.countBuilder(
+                StaggeredGridView.countBuilder(
                  padding: EdgeInsets.all(0),
                  crossAxisCount: 2,
                  itemCount: demoItems.length,
@@ -55,7 +66,10 @@ class HomeScreen extends StatelessWidget {
                  shrinkWrap: true,
                  mainAxisSpacing: 0,
                  itemBuilder: (context, index) {
-                   return Expanded(child: ItemCard(item: demoItems[index], index: index, key: key,));
+                   return Expanded(child: ItemCard(
+                     item: demoItems[index],
+                     index: index,
+                     key: key,));
                  },
                  staggeredTileBuilder: (index) => StaggeredTile.fit(1),
                ),

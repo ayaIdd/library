@@ -5,21 +5,26 @@ import 'package:e_library/Models/Item.dart';
 import 'package:e_library/Screens/details/details.dart';
 import '../../../Models/Item.dart';
 import '../../../constants.dart';
+import 'package:e_library/lib/net/userModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
 
 class ItemCard extends StatelessWidget {
   const ItemCard({
-     Key key,
-     this.item,
-     this.index,
+    Key key,
+    this.item,
+    this.index,
   }) : super(key: key);
 
   final Item item;
   final int index;
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
+   Widget build(BuildContext context) {
+
+     return GestureDetector(
       onTap: () {
+
         Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen(item: item, key: key ,)));
       },
      child: Expanded(child:Container(
@@ -73,5 +78,10 @@ class ItemCard extends StatelessWidget {
         ),
       ),
     )
-    ); }
-}
+    );
+
+   }
+
+
+
+   }

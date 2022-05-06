@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:e_library/Models/Category.dart';
 
 import '../../../constants.dart';
+import '../../../lib/welcome.dart';
 
 class Categories extends StatefulWidget {
   const Categories({
@@ -26,6 +27,7 @@ class _CategoriesState extends State<Categories> {
           scrollDirection: Axis.horizontal,
           itemCount: demoCategories.length,
           itemBuilder: (BuildContext context, int index) {
+
             return GestureDetector(
               onTap: () {
                 setState(() {
@@ -48,14 +50,16 @@ class _CategoriesState extends State<Categories> {
 
                     SizedBox(width: 5),
 
-                    Text(
-                      demoCategories[index].name,
-                      style: TextStyle(
+                  TextButton(onPressed: ()=>Navigator.of(context).push(MaterialPageRoute(builder:(context)=>welcome_page()))
+                    , child:  Text(
+                    demoCategories[index].name,
+                    style: TextStyle(
                         fontSize: 16,
                         color:Color(0xFFFCFBFB),
                         fontWeight: selectedIndex == index ? FontWeight.bold : FontWeight.w300
-                      ),
                     ),
+                  ),)
+
                   ],
                 ),
               ),

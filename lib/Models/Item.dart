@@ -1,4 +1,11 @@
-class Item {
+
+import 'package:e_library/lib/net/userModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+
+import '../lib/net/userModel.dart';
+
+ class Item {
   int id;
   String name;
   String description;
@@ -14,7 +21,48 @@ class Item {
   });
 }
 
-List<Item> demoItems = [
+
+/*
+// ignore: empty_constructor_bodies
+class Item {
+   String isbn;
+   String nom;
+   String auteur;
+   String image;
+
+
+// added
+   int color ;
+   int id ;
+   String name ;
+   String description;
+  Item(
+
+      {  this.isbn,
+         this.nom,
+         this.auteur,
+         this.image,
+         this.color,
+         this.id,
+         this.name,
+       this.description,});
+
+  Map<String , dynamic> toJson() => {'nom': nom, 'auteur':auteur,'image':image,'isbn':isbn };
+  //map.forEach((k, v) {
+   //   print('{ key: $k, value: $v }');
+   // });
+
+   Item.fromSnapshot(snapshot)
+  :     nom = snapshot.data()['nom'],
+        isbn = snapshot.data()['isbn'],
+        auteur = snapshot.data()['auteur'],
+        image = snapshot.data()['image'] ;
+
+
+}
+*/
+
+ List<Item> demoItems = [
 
   Item(
     id: 1,

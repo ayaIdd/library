@@ -1,3 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+
+/* class Categoryy {
+  final String categoryTitle;
+  final String categoryId;
+  final String icon;
+
+
+  Categoryy(
+      { @required this.categoryTitle,
+        @required this.categoryId,
+        @required this.icon,
+        });
+} */
+
 class Category {
   int id;
   String name;

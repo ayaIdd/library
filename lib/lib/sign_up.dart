@@ -10,7 +10,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:e_library/lib/net/userModel.dart';
-import 'package:e_library/lib/background.dart';
 
 
 class Signup extends StatefulWidget {
