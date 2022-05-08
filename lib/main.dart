@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
     return
       MaterialApp(
 
-      home:  LoginScreen(),
+      home:  IteemView2(), // IteemView2
     );
   }
 }

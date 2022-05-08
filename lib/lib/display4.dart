@@ -21,7 +21,7 @@ class IteemView2 extends StatefulWidget {
 
 }
 class _IteemViewState2 extends State<IteemView2>{
-  List<Books>  bookList  = [];
+  List<Books> bookList  = [];
 
 
 
@@ -62,7 +62,7 @@ class _IteemViewState2 extends State<IteemView2>{
                         ]
                     ),
 
-                    SizedBox(height: kDefaultPadding),
+                   // SizedBox(height: kDefaultPadding),
                     SizedBox(height: kDefaultPadding),
 
 
@@ -82,43 +82,35 @@ class _IteemViewState2 extends State<IteemView2>{
                                   itemExtent: 80,
                                   itemCount: snapshot.data.docs.length,
                                   itemBuilder: (context, index) {  //snapshot.data.docs[index]['nom'] ?? ''
-
+                                    final bookList = snapshot.data.docs[index] ;
                                     final  title = snapshot.data.docs[index]['nom'] ?? '' ;
                                     final autheur = snapshot.data.docs[index]['auteur'] ?? '' ;
                                     final isbn = snapshot.data.docs[index]['isbn'] ?? '' ;
                                     final image = snapshot.data.docs[index]['image'] ?? '' ;
-
-
-
+                                   // bookList  = [title , autheur , isbn , image ];
+                                    DocumentSnapshot document = snapshot.data.docs[index];
 
 
                                     return ListTile( //title ,autheur , isbn , image )
-                                      title : Text("BOOK TITLE : $title "),
-                                      subtitle: Text("author: $autheur"),
-                                      // onTap: () {Navigator.push(context, MaterialPageRoute(
-                                      //     builder: (context) => bookdetails(),
-                                      //   ));
-                                      // },
+                                      title : Text(document['nom'] ),
+                                      subtitle: Text( document['auteur'] ?? ""),
+                                      onTap: () {Navigator.push(context, MaterialPageRoute(
+                                          builder: (context) => PageTwo(passedAutheur: '$autheur',
+                                      passedtitle: '$title',
+                                       passedISBN: '$isbn',
+                                       passedImage: '$image',   )
+                                      ));
 
 
+                                      },
 
                                     );
 
                                   }
                               );})
 
-
-
-
-
-
-
                     )]
               ),
-
-
-
-
 
             )
         )
@@ -126,4 +118,44 @@ class _IteemViewState2 extends State<IteemView2>{
 
 
   }
+
 }
+class PageTwo extends StatefulWidget {
+  final String passedtitle;
+  final String passedAutheur;
+  final String passedISBN ;
+  final String passedImage ;
+
+
+  const PageTwo(
+      {Key key, this.passedtitle, this.passedAutheur, this.passedISBN,this.passedImage})
+      : super(key: key);
+//super is used to call the constructor of the base class which is the StatefulWidget here
+  @override
+  _PageTwoState createState() => _PageTwoState();
+}
+class _PageTwoState extends State<PageTwo> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Page 2 ${widget.passedtitle}'),
+        automaticallyImplyLeading: false, //optional: removes the default back arrow
+      ),
+      body: Column(
+        children: [
+          Container(
+            height: 400,
+            width: double.infinity,
+
+          ),
+          Text('${widget.passedAutheur}  autheur was passed '
+              '${widget.passedISBN} isbn passed'),
+//${} sign here prints the value of variable inside it.
+
+        ],),);
+    }
+  }
+
+
+
