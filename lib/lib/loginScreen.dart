@@ -11,6 +11,8 @@ import 'package:e_library/lib/resetpassword.dart';
 
 import 'package:e_library/Screens/home/home.dart';
 
+import 'display4.dart';
+
 
 
 class LoginScreen extends StatefulWidget {
@@ -228,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
             .then((uid) => {
           Fluttertoast.showToast(msg: "Login Successful"),
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => HomeScreen())),
+              MaterialPageRoute(builder: (context) => IteemView2())),
         });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {

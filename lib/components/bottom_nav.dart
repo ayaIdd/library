@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'package:e_library/lib/bodyprofile.dart';
 
+import '../lib/edit_profile.dart';
+
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
     Key key,

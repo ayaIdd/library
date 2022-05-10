@@ -38,7 +38,7 @@ class _CategoriesState extends State<Categories> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color:Color(0xFF111111),
+                  color:Color(0xFF111111),           // DESIGNNNNNNNNNNNNNNNNNNNNNNNNNNNNNn
                 ),
                 padding: EdgeInsets.symmetric(horizontal: kDefaultPadding * 0.8),
                 margin: EdgeInsets.only(right: kDefaultPadding * 0.5),
@@ -50,15 +50,8 @@ class _CategoriesState extends State<Categories> {
 
                     SizedBox(width: 5),
 
-                  TextButton(onPressed: ()=>Navigator.of(context).push(MaterialPageRoute(builder:(context)=>welcome_page()))
-                    , child:  Text(
-                    demoCategories[index].name,
-                    style: TextStyle(
-                        fontSize: 16,
-                        color:Color(0xFFFCFBFB),
-                        fontWeight: selectedIndex == index ? FontWeight.bold : FontWeight.w300
-                    ),
-                  ),)
+
+                 // ),)
 
                   ],
                 ),
