@@ -35,7 +35,7 @@ class _ScreenCase1 extends State<ScreenCase1>{
                 width: MediaQuery.of(context).size.width,
                 child:
                 StreamBuilder(
-                    stream: FirebaseFirestore.instance.collection('Books').doc('mathématique').collection('mathematique').snapshots(),
+                    stream: FirebaseFirestore.instance.collection('books').where('categorie', isEqualTo: "mathematique").snapshots(),
                     builder: (context,  AsyncSnapshot<QuerySnapshot> snapshot) { //AsyncSnapshot
                       if (!snapshot.hasData) return Center(
                         child: CircularProgressIndicator(),
@@ -103,9 +103,17 @@ class _ScreenCase1 extends State<ScreenCase1>{
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisSize : MainAxisSize.min,
                                         children: [
-                                          Text(title ,
-                                              style: TextStyle(
-                                                  fontSize: 13.0)),
+                                      Expanded(
+                                      child:SingleChildScrollView(
+                                      scrollDirection:Axis.horizontal,
+
+                                        child: Text(title ,
+                                            style: TextStyle(
+                                                fontSize: 13.0)
+                                        ),
+                                      ),
+                                    ),
+
                                           SizedBox(height:3 ),
                                           Text(autheur,
                                               style: TextStyle(

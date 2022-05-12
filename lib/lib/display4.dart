@@ -122,15 +122,6 @@ class _IteemViewState2 extends State<IteemView2>{
                           ),
 
 
-
-
-
-
-
-
-
-
-
                         ]
                     ),
 

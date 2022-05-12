@@ -12,10 +12,13 @@ import 'package:e_library/lib/resetpassword.dart';
 import 'package:e_library/Screens/home/home.dart';
 
 import 'display4.dart';
+import 'display5.dart';
+import 'editprofile3.dart';
 
 
 
 class LoginScreen extends StatefulWidget {
+  static String id = 'login-page';
   const LoginScreen({Key key}) : super(key: key);
 
   @override
@@ -156,6 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     onPressed: () async{
                       signIn(email.text, password.text);
+                      Navigator.of(context).push(MaterialPageRoute(builder:(context)=>IteemView3()));
                     },
                     child:  const Text('Login'),
                     style: TextButton.styleFrom(

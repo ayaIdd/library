@@ -7,17 +7,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:e_library/constants.dart';
-import '../Screens/home/components/categories.dart';
-import '../Screens/home/components/filter.dart';
 import '../Screens/home/components/search_bar.dart';
 import '../components/app_bar.dart';
 import '../components/bottom_nav.dart';
 import '../constants.dart';
-import 'itemDisplay.dart';
 import 'notification.dart';
 
 class IteemView3 extends StatefulWidget {
   const IteemView3({Key key}) : super(key: key);
+  static String id = 'login-page';
   @override
   _IteemViewState3 createState() => _IteemViewState3();
 
@@ -123,18 +121,7 @@ class _IteemViewState3 extends State<IteemView3>{
                               ),
                               onPressed: ()=>Navigator.of(context).push(MaterialPageRoute(builder:(context)=>ScreenCase3() )),
                           ),
-
-
-
-
-
-
-
-
-
-
-
-                        ]
+ ]
                     ),
 
                     // SizedBox(height: kDefaultPadding),
@@ -146,19 +133,22 @@ class _IteemViewState3 extends State<IteemView3>{
                         width: MediaQuery.of(context).size.width,
                         child:
                         StreamBuilder(
-                            stream: FirebaseFirestore.instance.collection('Books').doc('physique').collection('physique').snapshots(),
+                            stream: FirebaseFirestore.instance.collection('books').snapshots(),
                             builder: (context,  AsyncSnapshot<QuerySnapshot> snapshot) { //AsyncSnapshot
                               if (!snapshot.hasData) return Center(
                                 child: CircularProgressIndicator(),
                               );
 
-
+//snapshot.data.docs.length
                               return ListView.builder(
 
-                                padding:EdgeInsets.only(top: 22.0,right:22.0,left: 20.0 ) ,// list
+                                padding:EdgeInsets.only(top: 22.0,right:22.0,left: 20.0) ,// list
                                 shrinkWrap: true,
                                   itemExtent: 80,
-                                  itemCount: snapshot.data.docs.length,
+                                 itemCount: snapshot.data.docs.length +3??'' ,
+
+
+
                                   itemBuilder: (context, index) {  //snapshot.data.docs[index]['nom'] ?? ''
                                     // final bookList = snapshot.data.docs[index] ;
                                     final  title = snapshot.data.docs[index]['nom'] ?? '' ;
@@ -169,74 +159,90 @@ class _IteemViewState3 extends State<IteemView3>{
                                     DocumentSnapshot document = snapshot.data.docs[index];
 
 
-                                  //  return ListTile( //title ,autheur , isbn , image )
-                                  //   title : Text('$title' ),
-                                   //   subtitle: Text( document['auteur'] ?? ""),
-                                   //   onTap: () {Navigator.push(context, MaterialPageRoute(
-                                   //    builder: (context) => PageTwo(passedAutheur: '$autheur',
-                                   //       passedtitle: '$title',
-                                   //       passedISBN: '$isbn',
-                                  //       passedImage: '$image',   ),
-                                //  )
-//  );
+
+                                  return
+
+                                       Expanded( child:
+                                           Container(
+                                             margin: EdgeInsets.only(
+                                                 bottom: 18),
+                                             child: Row(
+                                               children: [
+
+                                                 Container(
+                                             child :
+                                             GestureDetector(     onTap: () {
+                                               Navigator.push(
+                                                   context, MaterialPageRoute(
+                                                 builder: (context) =>
+                                                     PageTwo(
+                                                       passedAutheur: '$autheur',
+                                                       passedtitle: '$title',
+                                                       passedISBN: '$isbn',
+                                                       passedImage: '$image',),
+                                               ));
+                                             }),
+
+                                                    height: 80,
+                                                   width: 62,
+                                                   decoration:
+                                                   BoxDecoration(
+                                                       borderRadius: BorderRadius
+                                                           .circular(5),
+                                                       image: DecorationImage(
+                                                           image: AssetImage(
+                                                               image))
+
+                                                   ),
+
+                                                 ),
+                                                 SizedBox(width: 15),
+
+                                                 Expanded(
+                                                   child: Column(
+                                                     mainAxisAlignment: MainAxisAlignment
+                                                         .center,
+                                                     crossAxisAlignment: CrossAxisAlignment
+                                                         .start,
+                                                     mainAxisSize: MainAxisSize
+                                                         .min,
+                                                     children: [
+                                                       Expanded(
+                                                         child: SingleChildScrollView(
+                                                           scrollDirection: Axis
+                                                               .horizontal,
+
+                                                           child: Text(title,
+                                                               style: TextStyle(
+                                                                   fontSize: 13.0)
+                                                           ),
+                                                         ),
+                                                       ),
 
 
+                                                       SizedBox(height: 3),
 
-                               //       },
+                                                       Text(autheur,
+                                                           style: TextStyle(
+                                                               fontSize: 13.0)),
 
-                                //    );
 
+                                                       SizedBox(height: 3),
+                                                       Text(isbn,
+                                                           style: TextStyle(
+                                                               fontSize: 13.0)),
+                                                       SizedBox(height: 3),
 
-
-                                     return
-
-                                       Expanded(
-                                         child: Container(
-                                           margin: EdgeInsets.only(bottom: 18),
-                                         child: Row(
-                                           children:  [
-                                            
-                                               Container(
-                                                 height: 80,
-                                                 width: 62,
-                                                 decoration: 
-                                                 BoxDecoration(
-                                                   borderRadius: BorderRadius.circular(5),
-                                                       image:DecorationImage(image:AssetImage(image) )
+                                                     ],
+                                                   ),
                                                  ),
 
-                                               ),
-                                             SizedBox(width:15 ),
-
-                                                Expanded(
-                                                  child: Column(
-                                                   mainAxisAlignment: MainAxisAlignment.center,
-                                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                                      mainAxisSize : MainAxisSize.min,
-                                                      children: [
-                                                     Text(title ,
-                                                    style: TextStyle(
-                                                      fontSize: 13.0)),
-                                                     SizedBox(height:3 ),
-                                                     Text(autheur,
-                                                         style: TextStyle(
-                                                             fontSize: 13.0)),
+                                               ],
+                                             ),
 
 
-                                                     SizedBox(height:3),
-                                                     Text(isbn,
-                                                         style: TextStyle(
-                                                             fontSize: 13.0)),
-                                                     SizedBox(height:3),
-
-                                                   ],
-                                               ),
-                                                ),
-
-                                           ],
-                                         ),
-                                         
-                                     ),
+                                           ),
+                                       //  })
                                        );
 
 
@@ -250,13 +256,16 @@ class _IteemViewState3 extends State<IteemView3>{
                             )
 
                     ),
+
                                    ]
               ),
 
 
 
             )
+
         )
+
     );
 
 

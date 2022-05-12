@@ -12,6 +12,7 @@ import 'package:e_library/constants.dart';
 import 'lib/display4.dart';
 import 'lib/display3.dart';
 import 'lib/display5.dart';
+import 'lib/edit_profile.dart';
 
 // @dart=2.9
 

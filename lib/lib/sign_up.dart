@@ -179,12 +179,6 @@ class _Signup extends State<Signup> {
 
 
             ),
-            /*   SizedBox(height: size.height * 0.03),
-            SizedBox(height: size.height * 0.03),
-            SizedBox(height: size.height * 0.03),
-            SizedBox(height: size.height * 0.03),
-            SizedBox(height: size.height * 0.05),*/
-
             Container(
               alignment: Alignment.centerRight,
               margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
