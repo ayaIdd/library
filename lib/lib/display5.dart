@@ -244,13 +244,7 @@ class _IteemViewState3 extends State<IteemView3>{
                                            ),
                                        //  })
                                        );
-
-
-
                                   },
-
-
-
                               );
                             }
                             )
@@ -259,12 +253,7 @@ class _IteemViewState3 extends State<IteemView3>{
 
                                    ]
               ),
-
-
-
-            )
-
-        )
+            ))
 
     );
 
