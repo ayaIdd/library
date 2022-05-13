@@ -145,7 +145,7 @@ class _IteemViewState3 extends State<IteemView3>{
                                 padding:EdgeInsets.only(top: 22.0,right:22.0,left: 20.0) ,// list
                                 shrinkWrap: true,
                                   itemExtent: 80,
-                                 itemCount: snapshot.data.docs.length +3??'' ,
+                                 itemCount: snapshot.data.docs.length  ?'' ,
 
 
 

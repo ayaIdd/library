@@ -3,6 +3,7 @@ import 'package:e_library/lib/display.dart';
 import 'package:e_library/lib/pages/Screen_dohs.dart';
 import 'package:e_library/lib/pages/Screen_trays.dart';
 import 'package:e_library/lib/pages/Screen_uno.dart';
+import 'package:e_library/lib/serach2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -74,14 +75,8 @@ class _IteemViewState3 extends State<IteemView4>{
                             hintText: 'Recherche'
 
                         ),
-                        onChanged: (val) {
-                          setState(() {
-                            name = val;
-                          });
-                        }
-
+                 onTap:  ()  =>Navigator.of(context).push(MaterialPageRoute(builder:(context)=>search2()))
                     ),
-
 
                     SizedBox(height: kDefaultPadding),
 
@@ -161,21 +156,20 @@ class _IteemViewState3 extends State<IteemView4>{
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
                         child:
-                        StreamBuilder<QuerySnapshot>(
-                            stream:  FirebaseFirestore.instance.collection('books')
-                                .where('nom' ,  isGreaterThanOrEqualTo: name.trim() + '\uf8ff' )
-                                .snapshots(),
-                            builder: (context,   snapshot){
-
+                        StreamBuilder(
+                            stream: FirebaseFirestore.instance.collection('books').snapshots(),
+                            builder: (context,  AsyncSnapshot<QuerySnapshot> snapshot) { //AsyncSnapshot
+                              if (!snapshot.hasData) return Center(
+                                child: CircularProgressIndicator(),
+                              );
 
 //snapshot.data.docs.length
                               return ListView.builder(
 
-
                                 padding:EdgeInsets.only(top: 22.0,right:22.0,left: 20.0) ,// list
                                 shrinkWrap: true,
                                 itemExtent: 80,
-                                itemCount: snapshot.data.docs.length ??'' ,
+                                itemCount: snapshot.data.docs.length  ??'' ,
 
 
 
@@ -200,19 +194,18 @@ class _IteemViewState3 extends State<IteemView4>{
                                         children: [
 
                                           Container(
-                                            // child :
-                                            // GestureDetector(     onTap: () {
-                                            //   Navigator.push(
-                                            //       context, MaterialPageRoute(
-                                            //     builder: (context) =>
-                                            //         PageTwo(
-                                            //           passedAutheur: '$autheur',
-                                            //           passedtitle: '$title',
-                                            //           passedISBN: '$isbn',
-                                            //           passedImage: '$image',),
-                                            //   ));
-                                            // }
-                                            // ),
+                                            child :
+                                            GestureDetector(     onTap: () {
+                                              Navigator.push(
+                                                  context, MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PageTwo(
+                                                      passedAutheur: '$autheur',
+                                                      passedtitle: '$title',
+                                                      passedISBN: '$isbn',
+                                                      passedImage: '$image',),
+                                              ));
+                                            }),
 
                                             height: 80,
                                             width: 62,
