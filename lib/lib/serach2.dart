@@ -19,6 +19,8 @@ class _search2 extends State<search2>{
   Widget build(BuildContext) {
    return Scaffold(
        appBar: AppBar(
+
+          backgroundColor: Colors.black ,
          title:
 
 
@@ -52,19 +54,32 @@ class _search2 extends State<search2>{
 
        ),
 
-           body : StreamBuilder<QuerySnapshot>(
+
+
+
+           body :
+           SingleChildScrollView(
+            padding: EdgeInsets.all(9.0),
+              child: SafeArea(
+                child :
+
+
+           StreamBuilder<QuerySnapshot>(
              stream:  FirebaseFirestore.instance.collection('books')
-               .where('nom' ,  isGreaterThanOrEqualTo: name.trim() + '\uf8ff' )
+               .where('nom' ,  isGreaterThanOrEqualTo: name.trim()  )   //+ '\uf8ff'
                .snapshots(),
                builder: (context,   snapshot){
+               if (snapshot.data == null ) return Center(
+                 child: CircularProgressIndicator(),
+               );
 
-      return
+               return
                ListView.builder(
 
                  padding:EdgeInsets.only(top: 22.0,right:22.0,left: 20.0) ,// list
                  shrinkWrap: true,
                  itemExtent: 80,
-                 itemCount: snapshot.data.docs.length ??'' ,
+                 itemCount: snapshot.data.docs.length  ??'' ,
 
 
 
@@ -171,5 +186,5 @@ class _search2 extends State<search2>{
            )
 
 
-   );
+   )));
  }}

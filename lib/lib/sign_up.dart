@@ -1,3 +1,4 @@
+import 'package:e_library/lib/Searchh.dart';
 import 'package:e_library/lib/home.dart';
 import 'package:flutter/material.dart';
 import 'package:e_library/lib/loginScreen.dart' ;
@@ -300,7 +301,7 @@ class _Signup extends State<Signup> {
 
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => HomeView()),
+        MaterialPageRoute(builder: (context) => IteemView4()),
             (route) => false);
   }
 }

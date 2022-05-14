@@ -1,13 +1,49 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_library/lib/loginScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:e_library/lib/about_us.dart';
 import 'package:e_library/lib/soummam.dart';
 import 'package:e_library/lib/help.dart';
 import 'package:e_library/lib/editprofile3.dart';
+import 'package:provider/provider.dart';
+
+import '../addbook.dart';
+import '../constants.dart';
+
+class ProfileUI extends StatefulWidget {
+  const ProfileUI({Key key}) : super(key: key);
+
+  @override
+  State<ProfileUI> createState() => _ProfileUIState();
+}
+
+class _ProfileUIState extends State<ProfileUI> {
+  bool _isAdmin = false;
+
+  @override
+  void initState(){
+    getData();
+    super.initState();
+  }
+
+  Future<void> getData() async {
+    User user =  await FirebaseAuth.instance.currentUser;
+    var vari = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+    setState(() {
+     _isAdmin  = vari.data()['admin'] ? _isAdmin = null : _isAdmin = false  ;
+
+
+    });
 
 
 
-class ProfileUI extends StatelessWidget {
+
+
+  }
+
 
 
   Widget textfield({@required hintText}) {
@@ -87,7 +123,7 @@ class ProfileUI extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(19),
+                    padding: EdgeInsets.all(0),
                     child: Text(
                       "Mon Profile",
                       style: TextStyle(
@@ -100,7 +136,7 @@ class ProfileUI extends StatelessWidget {
                   ),
                   Container(
                     padding: EdgeInsets.all(10.0),
-                    width: MediaQuery.of(context).size.width / 2,
+                   width: MediaQuery.of(context).size.width / 2,
                     height: MediaQuery.of(context).size.width / 2.5,
                     decoration: BoxDecoration(
                       border: Border.all(width: 4, color: Color(0xFF2661FA)),
@@ -124,21 +160,25 @@ class ProfileUI extends StatelessWidget {
             ),
 
 
+            SizedBox(height: kDefaultPadding),
 
-    Column(
 
-              mainAxisAlignment: MainAxisAlignment.end,
+
+            Column(
+
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
                 Container(
 
                     
-                    child : Text("ABCD XYZ", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))
+                   // child : Text("ABCD XYZ", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))
 
                 ),
 
 
-                SizedBox(width : 1, height : 35),
+                SizedBox(width : 1, height : 100),
+               // SizedBox(height: kDefaultPadding),
 
                 ListTile(
 
@@ -153,6 +193,7 @@ class ProfileUI extends StatelessWidget {
 
 
 
+                SizedBox(height: kDefaultPadding),
 
 
 
@@ -165,6 +206,8 @@ class ProfileUI extends StatelessWidget {
                   },
                 ),
 
+                SizedBox(height: kDefaultPadding),
+
                 Divider(color: Color(0xFFE59a59)),
                 ListTile(
                   leading: Icon(Icons.menu_book, color:Color(0xFF2661FA)),
@@ -173,6 +216,8 @@ class ProfileUI extends StatelessWidget {
                     Navigator.push(context ,MaterialPageRoute(builder: (context)=> SoummamUI()));
                   },
                 ),
+
+                SizedBox(height: kDefaultPadding),
 
 
                 Divider(color: Color(0xFFE59a59)),
@@ -184,11 +229,40 @@ class ProfileUI extends StatelessWidget {
                     } ,
                 ),
 
+                SizedBox(height: kDefaultPadding),
+
+
                 Divider(color: Color(0xFFE59a59)),
                 ListTile(
                   leading: Icon(Icons.logout, color : Color(0xFF2661FA)),
                   title: Text("Se Déconnecter",style: TextStyle(fontWeight: FontWeight.bold)),
-                  onTap : () => null,
+                  onTap : () async {
+                    await FirebaseAuth.instance.signOut().then((value) => Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginScreen()),(route) => false));
+
+
+                  }
+                  ,
+                ),
+
+                SizedBox(height: kDefaultPadding),
+
+
+          Visibility (
+            visible: _isAdmin,
+            child :
+              ListTile(
+
+
+    leading: Icon(Icons.add_moderator , color : Color(0xFF2661FA)),
+    title: Text("dont click unless you're the admin ",style: TextStyle(fontWeight: FontWeight.bold)),
+    onTap : () {
+    Navigator.push(context ,MaterialPageRoute(builder: (context)=> Addbooks()));
+    } , )
+
+
+
+
+
                 ),
 
               ],
