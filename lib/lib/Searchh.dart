@@ -9,10 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:e_library/constants.dart';
 import '../Screens/home/components/search_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../components/app_bar.dart';
 import '../components/bottom_nav.dart';
 import '../constants.dart';
 import 'notification.dart';
+import 'package:flutter/src/widgets/heroes.dart';
 
 class IteemView4 extends StatefulWidget {
   const IteemView4({Key key}) : super(key: key);
@@ -28,12 +31,17 @@ class _IteemViewState3 extends State<IteemView4>{
 
 
 
-  @override
+
+
+
+
+
 
   Widget build(BuildContext)
   {
     return Scaffold(
         appBar: buildAppBar(
+
             context,
             title: '',
             actions: <Widget>[
@@ -43,8 +51,8 @@ class _IteemViewState3 extends State<IteemView4>{
               )
             ]
         ),
-        bottomNavigationBar: BottomNavBar(),
-        extendBody: true,
+       // bottomNavigationBar: BottomNavBar(),
+       // extendBody: true,
         body:
         SingleChildScrollView(
             padding: EdgeInsets.all(9.0),
@@ -95,9 +103,12 @@ class _IteemViewState3 extends State<IteemView4>{
                           TextButton(
                             child: Text(
                                 "Mathématique",
-                                style: TextStyle(fontSize: 14)
+                                style: TextStyle(fontSize: 14 ,color:Colors.black ),
+
                             ),
                             style: ButtonStyle(
+                               // backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFE59a59)),
+
                                 padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(14)),
                                 foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -114,9 +125,11 @@ class _IteemViewState3 extends State<IteemView4>{
                           TextButton(
                             child: Text(
                                 "  Physique  ",
-                                style: TextStyle(fontSize: 14)
+                                style: TextStyle(fontSize: 14,color:Colors.black)
                             ),
                             style: ButtonStyle(
+                             //   backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFE59a59)),
+
                                 padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(14)),
                                 foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -129,11 +142,13 @@ class _IteemViewState3 extends State<IteemView4>{
                             onPressed: () =>Navigator.of(context).push(MaterialPageRoute(builder:(context)=>ScreenCase2() )),
                           ),
                           TextButton(
+
                             child: Text(
                                 "Informatique",
-                                style: TextStyle(fontSize: 14)
+                                style: TextStyle(fontSize: 14,color:Colors.black)
                             ),
                             style: ButtonStyle(
+                               // backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFE59a59)),
                                 padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(14)),
                                 foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -179,6 +194,9 @@ class _IteemViewState3 extends State<IteemView4>{
                                   final autheur = snapshot.data.docs[index]['auteur'] ?? '' ;
                                   final isbn = snapshot.data.docs[index]['isbn'] ?? '' ;
                                   final image = snapshot.data.docs[index]['image'] ?? '' ;
+                                  final disponible = snapshot.data.docs[index]['disponibilité'] ?? '' ;
+                                  final tag = snapshot.data.docs[index]['tag'] ?? '' ;
+
                                   // bookList  = [title , autheur , isbn , image ];
                                   DocumentSnapshot document = snapshot.data.docs[index];
 
@@ -203,7 +221,11 @@ class _IteemViewState3 extends State<IteemView4>{
                                                       passedAutheur: '$autheur',
                                                       passedtitle: '$title',
                                                       passedISBN: '$isbn',
-                                                      passedImage: '$image',),
+                                                      passedImage: '$image',
+                                                      passedDispo: '$disponible',
+                                                      passedTag : '$tag'
+
+                                                    ),
                                               ));
                                             }),
 
@@ -211,12 +233,24 @@ class _IteemViewState3 extends State<IteemView4>{
                                             width: 62,
                                             decoration:
                                             BoxDecoration(
-                                                borderRadius: BorderRadius
-                                                    .circular(5),
+                                              //  borderRadius: BorderRadius
+                                               //     .circular(5),
                                                 image: DecorationImage(
                                                     image: AssetImage(
-                                                        image))
-
+                                                        image,
+                                                    ),
+                                                    fit:BoxFit.cover
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(10),
+                                                  bottomRight: Radius.circular(10)
+                                                ),
+                                              boxShadow:[
+                                                BoxShadow(
+                                                  offset:Offset (5, 5),
+                                                  blurRadius:10
+                                                ),
+]
                                             ),
 
                                           ),
@@ -254,7 +288,8 @@ class _IteemViewState3 extends State<IteemView4>{
                                                 SizedBox(height: 3),
                                                 Text(isbn,
                                                     style: TextStyle(
-                                                        fontSize: 13.0)),
+                                                        fontSize: 13.0)
+                                                ),
                                                 SizedBox(height: 3),
 
                                               ],
@@ -277,8 +312,9 @@ class _IteemViewState3 extends State<IteemView4>{
 
                   ]
               ),
-            ))
-
+            )),
+       bottomNavigationBar: BottomNavBar(),
+     //  extendBody: true,
     );
 
 
@@ -290,10 +326,13 @@ class PageTwo extends StatefulWidget {   // itemCard
   final String passedAutheur;
   final String passedISBN ;
   final String passedImage ;
+  final String passedDispo ;
+  final String passedTag ;
+
 
 
   const PageTwo(
-      {Key key, this.passedtitle, this.passedAutheur, this.passedISBN,this.passedImage})
+      {Key key, this.passedtitle, this.passedAutheur, this.passedISBN,this.passedImage , this.passedDispo, this.passedTag})
       : super(key: key);
 //super is used to call the constructor of the base class which is the StatefulWidget here
   @override
@@ -303,24 +342,203 @@ class _PageTwoState extends State<PageTwo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Page 2 ${widget.passedtitle}'),
-        automaticallyImplyLeading: false, //optional: removes the default back arrow
-      ),
-      body: Column(
-        children: [
-          Container(
-            height: 400,
-            width: double.infinity,
+      // appBar: AppBar(
+      //   title: Text('Page 2 ${widget.passedtitle}'),
+      //   automaticallyImplyLeading: false, //optional: removes the default back arrow
+      //  ),
+      //  body: Column(
+      //   children: [
+      //    Container(
+      //    height: 400,
+      //   width: double.infinity,
 
-          ),
-          Text('${widget.passedAutheur}  autheur was passed '
-              '${widget.passedISBN} isbn passed'),
+      //  ),
+      // Text('${widget.passedAutheur}  autheur was passed '
+      //  '${widget.passedISBN} isbn passed'),
 //${} sign here prints the value of variable inside it.
 
-        ],),);
+      //  ],
+      // ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(500),
+        child: AppBar(
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          flexibleSpace: Hero(
+            tag: widget.passedTag,
+            child:
+            Container(
+              height: 600,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(
+                      image: AssetImage(widget.passedImage),
+                      fit: BoxFit.cover
+                  )
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.more_vert,
+                color: Colors.white,
+              ),
+
+            )
+          ],
+        ),
+
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    child: Text(widget.passedtitle,
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 11),
+
+                  // Icon(Icons.favorite_border_sharp,
+                  //     color: Colors.black
+                  //
+                  // ),
+                  IconButton(
+                    icon: Icon(Icons.favorite),
+                    color: Colors.black,
+
+                    onPressed: (){
+                                final userId = FirebaseAuth.instance.currentUser.uid ;
+
+                                final book= Book(
+                                  nom: widget.passedtitle ,
+                                  auteur:widget.passedAutheur ,
+                                  isbn: widget.passedISBN,
+                                  disponibilite: widget.passedDispo,
+
+
+                                  image:widget.passedImage,
+
+
+                                );
+                                getfav(book);
+                                },
+                  ),
+
+                ],
+              ),
+              Text(widget.passedAutheur,
+                style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 17
+                ),),
+              SizedBox(
+                height: 5,
+              ),
+              Text(widget.passedISBN
+                ,
+                style: TextStyle(
+                  color: Colors.black54,
+
+                ),
+              ),
+
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  children: [
+                    //   Icon(Icons.favorite_border_sharp, color: Colors.black),
+                    //  SizedBox(width: 11,),
+                    //  Text("ajouter ce livre à tes favoriés")
+                    OutlineButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)
+                      ),
+                      borderSide:
+                      BorderSide(width: 3, color: Colors.black87),
+                      child: Text(widget.passedDispo,
+                        style: TextStyle(
+                            color: Colors.black87
+                        ),
+                      ),
+                      onPressed: () {
+
+                      },
+
+                    )
+                  ],
+                ),
+              )
+
+            ],
+          ),
+        ),
+      ),
+
+
+    );
   }
 }
 
 
+  Future getfav(Book book) async {
+    /// Refrence to document
 
+    final fav = FirebaseFirestore.instance.collection('Favorites')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .collection('yourfavs').doc(book.isbn);
+    final json = book.toJson();
+    await fav.set(json);
+  }
+
+
+
+  class Book {
+    final String nom;
+    final String auteur;
+    final String isbn;
+    final String image;
+    final String userId;
+    final String disponibilite;
+
+
+    Book({
+      this.nom,
+      this.auteur,
+      this.isbn,
+      this.image,
+      this.userId,
+      this.disponibilite,
+
+
+    });
+
+    Map<String, dynamic> toJson() =>
+        {
+          'nom': nom,
+          'auteur': auteur,
+          'isbn': isbn,
+          'image': image,
+          'userId': userId,
+          'disponibilité': disponibilite,
+
+
+        };
+
+
+  }

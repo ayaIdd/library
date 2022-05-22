@@ -16,11 +16,15 @@ class _Addphystate extends State<Addphy>{
   final controllerauteur=TextEditingController();
   final controllerisbn=TextEditingController();
   final controllercategorie=TextEditingController();
-   @override
+  final controllerdispo=TextEditingController();
+  final idd = new DateTime.now().millisecondsSinceEpoch;
+
+
+  @override
 
   Widget build(BuildContext)=> Scaffold(
     appBar:AppBar(
-      title:Text('Add a informatic book')
+      title:Text('Ajouter un livre de physique')
       
     ),
     body: ListView(
@@ -28,7 +32,7 @@ class _Addphystate extends State<Addphy>{
       children:<Widget>[
         TextField(
           controller:controllernom,
-          decoration: decoration('Nom'),
+          decoration: decoration('Titre'),
 
         ),
         const SizedBox(height:24),
@@ -45,24 +49,36 @@ class _Addphystate extends State<Addphy>{
         ),
         const SizedBox(height:24),
         TextField(
+          controller:controllerdispo,
+          decoration: decoration('Disponibilité'),
+
+        ),
+        const SizedBox(height:24),
+        TextField(
           controller:controllercategorie,
-          decoration: decoration('Categorie'),
+          decoration: decoration('Categorie: Physique'),
 
         ),
         const SizedBox(height:32),
         ElevatedButton(
-          child: Text('Add'),
+          child: Text('Ajouter'),
           onPressed: (){
             final user= User(
               nom: controllernom.text,
               auteur: controllerauteur.text,
               isbn: controllerisbn.text,
-              categorie: controllercategorie.text,
-              image:"assets/books/img.jpg",
+              categorie: 'physique',
+              image:"assets/books/img.png",
+              disponibilite:controllerdispo.text,
+              tag:idd.toString(),
+
+
 
             );
             addbook(user);
             addbooks(user);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text("Livre ajouté")));
+
             Navigator.pop(context);
           },
 
@@ -100,6 +116,10 @@ class User{
   final String isbn;
   final String image;
   final String categorie;
+  final String disponibilite;
+  final String tag;
+
+
 
   User({
     this.nom,
@@ -107,6 +127,9 @@ class User{
     this.isbn,
     this.image,
     this.categorie,
+    this.disponibilite,
+    this.tag,
+
   });
   Map<String, dynamic> toJson() =>{
     'nom':nom,
@@ -114,6 +137,9 @@ class User{
     'isbn':isbn,
     'image':image,
     'categorie':categorie,
+    'disponibilité':disponibilite,
+    'tag':tag,
+
 
   };
 

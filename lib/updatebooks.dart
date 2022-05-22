@@ -16,11 +16,13 @@ class _updatebookstate extends State<updatebook >{
   final controllerauteur=TextEditingController();
   final controllerisbn=TextEditingController();
   final controllercategorie=TextEditingController();
-   @override
+  final controllerdispo=TextEditingController();
+
+  @override
 
   Widget build(BuildContext)=> Scaffold(
     appBar:AppBar(
-      title:Text('Update a book')
+      title:Text('Modifier un livre')
       
     ),
     body: ListView(
@@ -28,7 +30,7 @@ class _updatebookstate extends State<updatebook >{
       children:<Widget>[
         TextField(
           controller:controllernom,
-          decoration: decoration('Nom'),
+          decoration: decoration('Titre'),
 
         ),
         const SizedBox(height:24),
@@ -45,20 +47,27 @@ class _updatebookstate extends State<updatebook >{
         ),
         const SizedBox(height:24),
         TextField(
+          controller:controllerdispo,
+          decoration: decoration('Disponibilité'),
+
+        ),
+        const SizedBox(height:24),
+        TextField(
           controller:controllercategorie,
           decoration: decoration('categorie'),
 
         ),
         const SizedBox(height:32),
         ElevatedButton(
-          child: Text('update'),
+          child: Text('Modifier'),
           onPressed: (){
             final user= User(
               nom: controllernom.text,
               auteur: controllerauteur.text,
               isbn: controllerisbn.text,
               categorie: controllercategorie.text,
-              
+
+
 
             );
              final docbook=FirebaseFirestore.instance.collection('books').doc(user.isbn);
@@ -69,6 +78,7 @@ class _updatebookstate extends State<updatebook >{
                  'auteur':controllerauteur.text,
                  'isbn':controllerisbn.text,
                  'categorie':controllercategorie.text,
+                 'disponibilité':controllerdispo.text,
              });
              
             

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:e_library/lib/bodyprofile.dart';
-import 'package:e_library/lib/edit_profile.dart';
-import 'package:e_library/lib/notification.dart';
 
 class AboutUI extends StatefulWidget{
   _AboutUIState createState() => _AboutUIState();
@@ -75,7 +73,7 @@ class _AboutUIState extends State<AboutUI> {
               shape : BoxShape.rectangle,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage('https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1140180560?k=20&m=1140180560&s=612x612&w=0&h=X_400OQDFQGqccORnKt2PHYvTZ3dBLeEnCH_hRiUQrY='),
+                image: AssetImage('assets/images/logo.png'),
 
               ),
 
@@ -100,7 +98,7 @@ class _AboutUIState extends State<AboutUI> {
 
 
           SizedBox(width : 10, height : 10),
-          Center( child : Text("Application", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
+          Center( child : Text("S-bib", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
 
           SizedBox(width : 30, height : 30),
           Row(
@@ -175,7 +173,7 @@ class _AboutUIState extends State<AboutUI> {
               Text(
                 "A tous les rats de bibliothèques, "
                   "\n \n Cette application est un outil permettant de chercher facilement un livre de la bibliothèque principale de Béjaia -Soummam- en gagnant un temps énorme."
-                      " \nProfitez des fonctionnalités de *********, et faites nous part de votre avis, afin de nous permettre d'améliorer des performances de l'application. ",
+                      " \nProfitez des fonctionnalités de S-Bib , et faites nous part de votre avis, afin de nous permettre d'améliorer des performances de l'application. ",
                   style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
         ]
       ),

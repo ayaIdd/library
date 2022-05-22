@@ -23,7 +23,7 @@ class _Mainpagestate extends State<Mainpage>{
   Widget build(BuildContext)=> Scaffold(
     appBar:AppBar(
 
-      title:Text('Delete a book')
+      title:Text('Supprimer un livre')
 
     ),
     body: ListView(
@@ -31,7 +31,7 @@ class _Mainpagestate extends State<Mainpage>{
       children:<Widget>[
         TextField(
           controller:controllerisbn,
-          decoration: decoration('isbn'),
+          decoration: decoration('Isbn'),
 
         ),
         const SizedBox(height:24),
@@ -43,7 +43,7 @@ class _Mainpagestate extends State<Mainpage>{
         ),
         const SizedBox(height:32),
         ElevatedButton(
-          child: Text('Delete'),
+          child: Text('Supoprimer'),
           onPressed: (){
             final user= User(
               isbn: controllerisbn.text,
@@ -56,7 +56,9 @@ class _Mainpagestate extends State<Mainpage>{
 
              //update
              docbook.delete();
-            Navigator.of(context).push(MaterialPageRoute(builder:(context)=>IteemView3()));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text("Livre supprimé")));
+
+            //Navigator.of(context).push(MaterialPageRoute(builder:(context)=>IteemView3()));
 
              
             

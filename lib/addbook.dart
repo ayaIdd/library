@@ -25,7 +25,7 @@ class _Addbooksstate extends State<Addbooks>{
   Widget build(BuildContext)=> Scaffold(
     appBar:AppBar(
 
-      title:Text('Add update delete book')
+      title:Text('Mis à jours des livres')
       
     ),
     body:Center(
@@ -36,28 +36,28 @@ class _Addbooksstate extends State<Addbooks>{
 
     children: [
       ElevatedButton(
-        child: Text("add a book"),
+        child: Text("Ajouter un livre"),
         onPressed: (){
           Navigator.push(context ,MaterialPageRoute(builder: (context)=>choosecatagorie()));
         },
       ),
       SizedBox(width: 5),
       ElevatedButton(
-        child: Text("update a book"),
+        child: Text("Modifier un livre"),
         onPressed: (){
           Navigator.push(context ,MaterialPageRoute(builder: (context)=>updatebook()));
         },
       ),
        SizedBox(width: 5),
       ElevatedButton(
-        child: Text("delete a book"),
+        child: Text("Supprimer un livre"),
         onPressed: (){
           Navigator.push(context ,MaterialPageRoute(builder: (context)=>Mainpage()));
         },
       ),
       SizedBox(width: 5),
-      RaisedButton(
-        child: Text("disponible"),
+      ElevatedButton(
+        child: Text("Disponibilité"),
         onPressed: (){
           Navigator.push(context ,MaterialPageRoute(builder: (context)=>BookDispo()));
         },

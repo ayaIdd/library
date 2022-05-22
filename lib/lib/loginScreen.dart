@@ -111,9 +111,9 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 Container(
 
-                 child : const Text('Welcome Back!',
+                 child : const Text('bienvenue!',
                   style:TextStyle(
-                    fontSize: 24.0,
+                    fontSize: 23.0,
                     fontWeight:FontWeight.bold,
                   ) ,
                 ),
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                    TextButton(
 
                       onPressed: ()  =>Navigator.of(context).push(MaterialPageRoute(builder:(context)=>ResetScreen() )),  // ResetScreen
-                      child: const Text('Forgot Password'),
+                      child: const Text('mot de passe oublié'),
                     ),
                   ],),
 

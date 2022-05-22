@@ -1,17 +1,17 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_library/lib/loginScreen.dart';
+import 'package:e_library/lib/pages/help.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:e_library/lib/about_us.dart';
 import 'package:e_library/lib/soummam.dart';
-import 'package:e_library/lib/help.dart';
 import 'package:e_library/lib/editprofile3.dart';
 import 'package:provider/provider.dart';
-
 import '../addbook.dart';
 import '../constants.dart';
+import 'Searchh.dart';
 
 class ProfileUI extends StatefulWidget {
   const ProfileUI({Key key}) : super(key: key);
@@ -21,8 +21,7 @@ class ProfileUI extends StatefulWidget {
 }
 
 class _ProfileUIState extends State<ProfileUI> {
-  bool _isAdmin = false;
-
+  bool _isAdmin = false  ;
   @override
   void initState(){
     getData();
@@ -33,7 +32,8 @@ class _ProfileUIState extends State<ProfileUI> {
     User user =  await FirebaseAuth.instance.currentUser;
     var vari = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
     setState(() {
-     _isAdmin  = vari.data()['admin'] ? _isAdmin = null : _isAdmin = false  ;
+      _isAdmin  = vari.data()['admin']   ;
+     //vari.data()['admin'] = null : _isAdmin = false
 
 
     });
@@ -91,13 +91,15 @@ class _ProfileUIState extends State<ProfileUI> {
       appBar: AppBar(
 
         elevation: 0.0,
-        backgroundColor: Color(0xFFE59a59),
+        backgroundColor: Color(0xffe59a59),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context ,MaterialPageRoute(builder: (context)=> IteemView4()));
+          },
         ),
 
       ),
@@ -139,7 +141,7 @@ class _ProfileUIState extends State<ProfileUI> {
                    width: MediaQuery.of(context).size.width / 2,
                     height: MediaQuery.of(context).size.width / 2.5,
                     decoration: BoxDecoration(
-                      border: Border.all(width: 4, color: Color(0xFF2661FA)),
+
                       boxShadow: [
                         BoxShadow(
                           spreadRadius: 2,
@@ -150,7 +152,9 @@ class _ProfileUIState extends State<ProfileUI> {
                       shape : BoxShape.circle,
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage('https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1140180560?k=20&m=1140180560&s=612x612&w=0&h=X_400OQDFQGqccORnKt2PHYvTZ3dBLeEnCH_hRiUQrY='),
+                      //  image: NetworkImage('https://media.istockphoto.com/photos/colored-powder-explosion-on-black-background-picture-id1140180560?k=20&m=1140180560&s=612x612&w=0&h=X_400OQDFQGqccORnKt2PHYvTZ3dBLeEnCH_hRiUQrY='),
+  image: NetworkImage('https://rifdoc.com/wp-content/uploads/2021/06/a65832155622ac173337874f02b218fb.png'),
+                          //  image: AssetImage('assets/profile3.png'),
 
                       ),
                     ),
@@ -177,13 +181,13 @@ class _ProfileUIState extends State<ProfileUI> {
                 ),
 
 
-                SizedBox(width : 1, height : 100),
+                SizedBox(width : 1, height : 140),
                // SizedBox(height: kDefaultPadding),
 
                 ListTile(
 
                   leading: Icon(Icons.person , color: Color(0xFF2661FA)),
-                  title: Text('Mon Compte',style: TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text('Mon Compte  ',style: TextStyle(fontWeight: FontWeight.bold)),
                   onTap : () {
                     Navigator.push(context ,MaterialPageRoute(builder: (context)=> EditProfileUI()));
                   },
@@ -235,7 +239,7 @@ class _ProfileUIState extends State<ProfileUI> {
                 Divider(color: Color(0xFFE59a59)),
                 ListTile(
                   leading: Icon(Icons.logout, color : Color(0xFF2661FA)),
-                  title: Text("Se Déconnecter",style: TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text("Se Déconnecter ",style: TextStyle(fontWeight: FontWeight.bold)),
                   onTap : () async {
                     await FirebaseAuth.instance.signOut().then((value) => Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginScreen()),(route) => false));
 
@@ -245,19 +249,21 @@ class _ProfileUIState extends State<ProfileUI> {
                 ),
 
                 SizedBox(height: kDefaultPadding),
+                Divider(color: Color(0xFFE59a59)),
 
 
-          Visibility (
-            visible: _isAdmin,
-            child :
-              ListTile(
+
+                Visibility (
+                  visible: _isAdmin ,
+
+                  child : ListTile(
 
 
-    leading: Icon(Icons.add_moderator , color : Color(0xFF2661FA)),
-    title: Text("dont click unless you're the admin ",style: TextStyle(fontWeight: FontWeight.bold)),
-    onTap : () {
-    Navigator.push(context ,MaterialPageRoute(builder: (context)=> Addbooks()));
-    } , )
+                leading: Icon(Icons.add_moderator , color : Color(0xFF2661FA)),
+                title: Text("ADMIN PANEL ",style: TextStyle(fontWeight: FontWeight.bold)),
+                 onTap : () {
+                 Navigator.push(context ,MaterialPageRoute(builder: (context)=> Addbooks()));
+                 } , )
 
 
 
@@ -265,7 +271,9 @@ class _ProfileUIState extends State<ProfileUI> {
 
                 ),
 
+
               ],
+
 
             ),
 

@@ -16,11 +16,17 @@ class _Addmathstate extends State<Addmath>{
   final controllerauteur=TextEditingController();
   final controllerisbn=TextEditingController();
   final controllercategorie=TextEditingController();
-   @override
+  final controllerdispo=TextEditingController();
+  final idd = new DateTime.now().millisecondsSinceEpoch;
+
+
+
+
+  @override
 
   Widget build(BuildContext)=> Scaffold(
     appBar:AppBar(
-      title:Text('Add a informatic book')
+      title:Text('Ajouter un lvre de mathématique')
       
     ),
     body: ListView(
@@ -28,7 +34,7 @@ class _Addmathstate extends State<Addmath>{
       children:<Widget>[
         TextField(
           controller:controllernom,
-          decoration: decoration('Nom'),
+          decoration: decoration('Titre'),
 
         ),
         const SizedBox(height:24),
@@ -45,24 +51,38 @@ class _Addmathstate extends State<Addmath>{
         ),
         const SizedBox(height:24),
         TextField(
+          controller:controllerdispo,
+          decoration: decoration('Disponibilité'),
+
+        ),
+        const SizedBox(height:24),
+        TextField(
           controller:controllercategorie,
-          decoration: decoration('categorie'),
+          decoration: decoration('categorie: Matématique'),
 
         ),
         const SizedBox(height:32),
         ElevatedButton(
-          child: Text('Add'),
+          child: Text('Ajouter'),
           onPressed: (){
             final user= User(
               nom: controllernom.text,
               auteur: controllerauteur.text,
               isbn: controllerisbn.text,
-              categorie: controllercategorie.text,
-              image:"assets/books/imgdefaut.jpg",
+              categorie: 'mathématique',
+              disponibilite:controllerdispo.text,
+              tag:idd.toString(),
+
+
+
+              image:"assets/books/img.png",
+
 
             );
             addbook(user);
             addbooks(user);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: const Text("Livre ajouté")));
+
             Navigator.pop(context);
           },
         ),
@@ -86,6 +106,7 @@ class _Addmathstate extends State<Addmath>{
   }
   Future addbooks(User user) async{
     /// Refrence to document
+
     final docbook= FirebaseFirestore.instance.collection('books').doc(user.isbn);
 
     final json =user.toJson();
@@ -99,6 +120,10 @@ class User{
   final String isbn;
   final String image;
   final String categorie;
+  final String disponibilite;
+  final String tag;
+
+
 
   User({
     this.nom,
@@ -106,6 +131,9 @@ class User{
     this.isbn,
     this.image,
     this.categorie,
+    this.disponibilite,
+    this.tag
+
   });
   Map<String, dynamic> toJson() =>{
     'nom':nom,
@@ -113,8 +141,12 @@ class User{
     'isbn':isbn,
     'image':image,
     'categorie':categorie,
+    'disponibilité':disponibilite,
+    'tag':tag,
 
-  };
+
+
+};
 
 
 }

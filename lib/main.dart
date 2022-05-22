@@ -13,8 +13,8 @@ import 'lib/Searchh.dart';
 import 'lib/display4.dart';
 import 'lib/display3.dart';
 import 'lib/display5.dart';
-import 'lib/edit_profile.dart';
 import 'lib/serach2.dart';
+import 'lib/welcome.dart';
 
 // @dart=2.9
 
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
     return
       MaterialApp(
 
-      home:  LoginScreen(), // IteemView2
+      home:  welcome_page(), // IteemView2
     );
   }
 }

@@ -21,6 +21,8 @@ class _ScreenCase1 extends State<ScreenCase1>{
   {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xffe59a59),
+
         title: Text('books math'),
         leading: Icon(Icons.menu_book_sharp),
 ),

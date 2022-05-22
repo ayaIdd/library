@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'package:e_library/lib/bodyprofile.dart';
 
-import '../lib/edit_profile.dart';
+import '../lib/pages/LivreFavoris.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -11,10 +11,11 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60.0,
+    return
+      Container(
+     height: 35.0,
       width: double.infinity,
-      decoration: BoxDecoration(
+    decoration: BoxDecoration(
         color: Color(0xFFFFFEFD),
         borderRadius: BorderRadius.circular(25)
       ),
@@ -23,26 +24,31 @@ class BottomNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
+         IconButton(
               icon: Icon(Icons.home),
               color:Colors.black,
-              onPressed: () {}
+             onPressed: () {}
           ),
 
           IconButton(
-              icon: Icon(Icons.favorite),
-              color:Colors.black,
-               onPressed: () {}
+            icon: Icon(Icons.favorite),
+            color:Colors.black,
+              onPressed: () =>Navigator.of(context).push(MaterialPageRoute(builder:(context)=>LivreFavorisPage() )),//LivreFavorisPage
     ),
-          IconButton(
+
+         IconButton(
               icon: Icon(Icons.person ),
-              color:Colors.black,
+             color:Colors.black,
               onPressed: () =>Navigator.of(context).push(MaterialPageRoute(builder:(context)=>ProfileUI())),
           ),
 
         ],
       ),
     );
+
+
+
+
   }
 }
 

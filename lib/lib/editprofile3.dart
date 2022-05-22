@@ -98,6 +98,15 @@ class _EditProfileUIState extends State<EditProfileUI> {
           toolbarHeight: 60,
           title: Text('Mon Compte'),
           centerTitle: true,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pop(context ,MaterialPageRoute(builder: (context)=> ProfileUI()));
+            },
+          ),
 
           flexibleSpace:
 
@@ -113,16 +122,7 @@ class _EditProfileUIState extends State<EditProfileUI> {
           ),
 
 
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
 
-            onPressed: () {
-              Navigator.push(context ,MaterialPageRoute(builder: (context)=> ProfileUI()));
-            } ,
-          ),
 
         ),
 

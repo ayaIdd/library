@@ -25,7 +25,7 @@ class _choosecatagoriestate extends State<choosecatagorie>{
 
   Widget build(BuildContext)=> Scaffold(
     appBar:AppBar(
-      title:Text('Add a book')
+      title:Text('Ajouter un livre')
       
     ),
     body:Center(
@@ -33,21 +33,21 @@ class _choosecatagoriestate extends State<choosecatagorie>{
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
       RaisedButton(
-        child: Text("informatic"),
+        child: Text("Informatique"),
         onPressed: (){
           Navigator.push(context ,MaterialPageRoute(builder: (context)=> Addinfo()));
         },
       ),
       SizedBox(width: 5),
       RaisedButton(
-        child: Text("physic"),
+        child: Text("Physique"),
         onPressed: (){
           Navigator.push(context ,MaterialPageRoute(builder: (context)=>Addphy()));
         },
       ),
        SizedBox(width: 5),
       RaisedButton(
-        child: Text("matimatic"),
+        child: Text("Matématique"),
         onPressed: (){
           Navigator.push(context ,MaterialPageRoute(builder: (context)=>Addmath()));
         },
