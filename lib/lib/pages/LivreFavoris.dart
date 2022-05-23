@@ -110,7 +110,7 @@ class _LivreFavorisPageState extends State<LivreFavorisPage> {
                                     //   ));
                                     // }),
 
-                                    height: 80,
+                                    height: 100,
                                     width: 62,
                                     decoration:
                                     BoxDecoration(
@@ -160,44 +160,68 @@ class _LivreFavorisPageState extends State<LivreFavorisPage> {
 
 
                                         SizedBox(height: 3),
-                                        //
-                                        // Text(autheur,
-                                        //     style: TextStyle(
-                                        //         fontSize: 13.0)),
-                                        //
-                                        //
-                                        // SizedBox(height: 3),
-                                        // Text(disponible,
-                                        //     style: TextStyle(
-                                        //         fontSize: 13.0)
-                                        // ),
+
+                                         Text(autheur,
+                                            style: TextStyle(
+                                                fontSize: 13.0)),
+
+
                                         SizedBox(height: 3),
-
-                                        IconButton(
-                                          icon: Icon(Icons.favorite),
-                                          color: Colors.black,
-
-                                          onPressed: (){
-                                            final userId = FirebaseAuth.instance.currentUser.uid ;
-
-                                            final book= Book(
-                                              nom: title ,
-                                              auteur:autheur,
-                                              isbn: isbn,
-                                              disponibilite: disponible,
-
-
-                                              image:image,
-
-
-                                            );
-                                            removefav(book);
-                                          },
+                                        Text(disponible,
+                                            style: TextStyle(
+                                                fontSize: 13.0)
                                         ),
+                                    //    SizedBox(height: 3),
+
+                                        // IconButton(
+                                        //   icon: Icon(Icons.favorite),
+                                        //   color: Colors.black,
+                                        //
+                                        //   onPressed: (){
+                                        //     final userId = FirebaseAuth.instance.currentUser.uid ;
+                                        //
+                                        //     final book= Book(
+                                        //       nom: title ,
+                                        //       auteur:autheur,
+                                        //       isbn: isbn,
+                                        //       disponibilite: disponible,
+                                        //
+                                        //
+                                        //       image:image,
+                                        //
+                                        //
+                                        //     );
+                                        //     removefav(book);
+                                        //   },
+                                        // ),
 
                                       ],
                                     ),
+
                                   ),
+
+                                  IconButton(
+                                    icon: Icon(Icons.favorite),
+                                    color: Colors.black,
+
+                                    onPressed: (){
+                                      final userId = FirebaseAuth.instance.currentUser.uid ;
+
+                                      final book= Book(
+                                        nom: title ,
+                                        auteur:autheur,
+                                        isbn: isbn,
+                                        disponibilite: disponible,
+
+
+                                        image:image,
+
+
+                                      );
+                                      removefav(book);
+                                    },
+                                  ),
+
 
                                 ],
                               ),
